@@ -3,6 +3,7 @@ import './App.css'
 import chatbox from './images/chatbox.jpg'
 import weaather from './images/weather.png'
 import todo from './images/todo.jpeg'
+import bharat from './images/bharat.jpg'
 
 
 
@@ -45,19 +46,35 @@ function App() {
         </ul>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="hero-section">
-        <div className="hero-content">
-          <h1>Hi, I'm <span className="highlight">Bharat</span></h1>
-          <h2>React Developer</h2>
-          <p>I build modern, responsive web applications with React</p>
-          <div className="hero-buttons">
-            <a href="#projects" className="btn primary-btn">View My Work</a>
-            <a href="#contact" className="btn secondary-btn">Contact Me</a>
+      {/* Photo Section - Moved to top */}
+      <section id="photo" className="photo-section">
+        <div className="photo-container">
+          <div className="photo-wrapper">
+            <img src={bharat} alt="Bharat Varfa" className="profile-photo" />
+          </div>
+          <div className="photo-content">
+            <h1>Hi, I'm <span className="highlight">Bharat</span></h1>
+            <h2>React Developer</h2>
+            <p>I'm a passionate React developer with a keen eye for creating beautiful and functional user interfaces. With expertise in modern web technologies, I strive to build applications that make a difference.</p>
+            <div className="quick-info">
+              <div className="info-item">
+                <span className="info-label">Experience</span>
+                <span className="info-value">Fresher</span>
+              </div>
+              <div className="info-item">
+                <span className="info-label">Projects</span>
+                <span className="info-value">10+ Completed</span>
+              </div>
+            </div>
+            <div className="hero-buttons">
+              <a href="#projects" className="btn primary-btn">View My Work</a>
+              <a href="#contact" className="btn secondary-btn">Contact Me</a>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Remove or comment out the hero section since we merged it with photo section */}
       {/* Projects Section */}
       <section id="projects" className="projects-section">
         <h2 className="section-title">My Projects</h2>
