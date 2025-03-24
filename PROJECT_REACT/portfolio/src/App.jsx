@@ -4,12 +4,49 @@ import chatbox from './images/chatbox.jpg'
 import weaather from './images/weather.png'
 import todo from './images/todo.jpeg'
 import bharat from './images/bharat.jpg'
+import './components/ContactForm.css'
 
 
 
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isHovered, setIsHovered] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Input changed: ${name} = ${value}`); // Debug log
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Log form data
+      console.log('Form submitted:', formData);
+      
+      // Show success message
+      alert('Message sent successfully!');
+      
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to send message. Please try again.');
+    }
+  };
 
   const pro = [{
     id: 1,
@@ -49,14 +86,14 @@ function App() {
       {/* Photo Section - Moved to top */}
       <section id="photo" className="photo-section">
         <div className="photo-container">
-          <div className="photo-wrapper">
+          <div className="photo-wrapper animate-float">
             <img src={bharat} alt="Bharat Varfa" className="profile-photo" />
           </div>
           <div className="photo-content">
             <h1>Hi, I'm <span className="highlight">Bharat</span></h1>
             <h2>React Developer</h2>
             <p>I'm a passionate React developer with a keen eye for creating beautiful and functional user interfaces. With expertise in modern web technologies, I strive to build applications that make a difference.</p>
-            <div className="quick-info">
+            <div className="quick-info animate-pulse">
               <div className="info-item">
                 <span className="info-label">Experience</span>
                 <span className="info-value">Fresher</span>
@@ -80,7 +117,12 @@ function App() {
         <h2 className="section-title">My Projects</h2>
         <div className="projects-grid">
         {pro.map((project) => (
-          <div key={project.id} className="project-card">
+          <div 
+            key={project.id} 
+            className="project-card"
+            onMouseEnter={() => setIsHovered(project.id)}
+            onMouseLeave={() => setIsHovered(null)}
+          >
             <div className="project-image">
               <img src={project.image} alt={project.title} style={{height : "200px", width: "100%"}}/>
             </div>
@@ -147,43 +189,65 @@ function App() {
         <h2 className="section-title">Contact Me</h2>
         <div className="contact-container">
           <div className="contact-info">
-            <h3>Get In Touch</h3>
-            <p>Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
+            <h3>Let's Connect</h3>
             <div className="contact-details">
               <div className="contact-item">
-                <span className="contact-icon">📧</span>
-                <p>varfabharat19@gmail.com</p>
+                <i className="contact-icon">📧</i>
+                <div>
+                  <h4>Email</h4>
+                  <p>varfabharat19@gmail.com</p>
+                </div>
               </div>
               <div className="contact-item">
-                <span className="contact-icon">📱</span>
-                <p>+91 7415795995</p>
+                <i className="contact-icon">📱</i>
+                <div>
+                  <h4>Phone</h4>
+                  <p>+91 7415795995</p>
+                </div>
               </div>
-              <div className="contact-item">
-                <span className="contact-icon">📍</span>
-                <p>In your Heart </p>
+              <div className="social-links">
+                <a href="#" className="social-btn">GitHub</a>
+                <a href="#" className="social-btn">LinkedIn</a>
+                <a href="#" className="social-btn">Twitter</a>
               </div>
-            </div>
-            <div className="social-links">
-              <a href="#" className="social-icon">GitHub</a>
-              <a href="#" className="social-icon">LinkedIn</a>
-              <a href="#" className="social-icon">Twitter</a>
             </div>
           </div>
-          <form className="contact-form">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" className="btn primary-btn">Send Message</button>
-          </form>
+          <div className="form-container">
+            <h3>Send Message</h3>
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="input-group">
+                <input 
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <input 
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" className="submit-btn">Send Message</button>
+            </form>
+          </div>
         </div>
       </section>
 
