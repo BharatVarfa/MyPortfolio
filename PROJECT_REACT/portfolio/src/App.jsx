@@ -1,51 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import chatbox from './images/chatbox.jpg'
 import weaather from './images/weather.png'
 import todo from './images/todo.jpeg'
 import bharat from './images/bharat.jpg'
-import './components/ContactForm.css'
-
-
-
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isHovered, setIsHovered] = useState(null);
-  const [formData, setFormData] = useState({
+  const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    console.log(`Input changed: ${name} = ${value}`); // Debug log
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+  useEffect(() => {
+    // Add Font Awesome CDN
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
-    try {
-      // Log form data
-      console.log('Form submitted:', formData);
-      
-      // Show success message
-      alert('Message sent successfully!');
-      
-      // Clear form
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to send message. Please try again.');
-    }
+    console.log('Form submitted:', contactForm);
+    alert('Message sent successfully!');
+    setContactForm({ name: '', email: '', message: '' });
   };
 
   const pro = [{
@@ -79,7 +63,6 @@ function App() {
           <li><a href="#home" onClick={() => setActiveSection('home')} className={activeSection === 'home' ? 'active' : ''}>Home</a></li>
           <li><a href="#projects" onClick={() => setActiveSection('projects')} className={activeSection === 'projects' ? 'active' : ''}>Projects</a></li>
           <li><a href="#skills" onClick={() => setActiveSection('skills')} className={activeSection === 'skills' ? 'active' : ''}>Skills</a></li>
-          <li><a href="#contact" onClick={() => setActiveSection('contact')} className={activeSection === 'contact' ? 'active' : ''}>Contact</a></li>
         </ul>
       </nav>
 
@@ -185,72 +168,44 @@ function App() {
         </div>
       </section>
 
+      {/* Simple Contact Section */}
       <section id="contact" className="contact-section">
         <h2 className="section-title">Contact Me</h2>
         <div className="contact-container">
           <div className="contact-info">
-            <h3>Let's Connect</h3>
+            <h3>Get in Touch</h3>
             <div className="contact-details">
-              <div className="contact-item">
-                <i className="contact-icon">📧</i>
-                <div>
-                  <h4>Email</h4>
-                  <p>varfabharat19@gmail.com</p>
-                </div>
-              </div>
-              <div className="contact-item">
-                <i className="contact-icon">📱</i>
-                <div>
-                  <h4>Phone</h4>
-                  <p>+91 7415795995</p>
-                </div>
-              </div>
-              <div className="social-links">
-                <a href="#" className="social-btn">GitHub</a>
-                <a href="#" className="social-btn">LinkedIn</a>
-                <a href="#" className="social-btn">Twitter</a>
-              </div>
+              <p><strong>Email:</strong> varfabharat19@gmail.com</p>
+              <p><strong>Phone:</strong> +91 7415795995</p>
+              <p><strong>Location:</strong> Jaipur, Rajasthan</p>
             </div>
           </div>
-          <div className="form-container">
-            <h3>Send Message</h3>
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="input-group">
-                <input 
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <input 
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" className="submit-btn">Send Message</button>
-            </form>
-          </div>
+          <form className="contact-form" onSubmit={handleContactSubmit}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={contactForm.name}
+              onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={contactForm.email}
+              onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+              required
+            />
+            <textarea
+              placeholder="Your Message"
+              value={contactForm.message}
+              onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+              required
+              rows="5"
+            ></textarea>
+            <button type="submit" className="btn primary-btn">Send Message</button>
+          </form>
         </div>
       </section>
-
 
       {/* Footer */}
       <footer className="footer">
