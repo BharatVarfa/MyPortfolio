@@ -177,7 +177,7 @@ function App() {
             <div className="contact-details">
               <p><strong>Email:</strong> varfabharat19@gmail.com</p>
               <p><strong>Phone:</strong> +91 7415795995</p>
-              <p><strong>Location:</strong> Jaipur, Rajasthan</p>
+              <p><strong>Location:</strong> In Your Heart</p>
             </div>
           </div>
           <form className="contact-form" onSubmit={handleContactSubmit}>
