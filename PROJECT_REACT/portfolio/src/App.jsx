@@ -37,19 +37,25 @@ function App() {
     title: 'Interactive Chatbox',
     description: 'An interactive chatbox enables real-time messaging with users, displaying sent and received messages dynamically. It improves engagement and responsiveness in websites and apps.',
     tags: ['React', 'CSS', 'Java  Script'],
-    image: chatbox
+    image: chatbox,
+    demo: 'https://askbharat.netlify.app/',
+    source: 'https://github.com/BharatVarfa/ChatBox.git'
   }, {
     id: 2,
     title: 'Weather Detection',
     description: 'A Weather Detection App provides real-time weather updates based on user location or search queries. It displays temperature, humidity, wind speed, and forecasts using weather APIs, enhancing user convenience.',
     tags: ['React', 'CSS', 'JavaScript'],
-    image: weaather
+    image: weaather,
+    demo: '#',
+    source: '#'
   }, {
     id: 3,
     title: 'TODO App',
     description: 'A To-Do List app helps users organize tasks efficiently by adding, editing, and deleting items. It improves productivity with features like due dates, categories, and task completion tracking.',
     tags: ['React', 'CSS', 'JavaScript'],
-    image: todo
+    image: todo,
+    demo: '#',
+    source: '#'
   }]
 
   return (
@@ -66,14 +72,14 @@ function App() {
         </ul>
       </nav>
 
-      {/* Photo Section - Moved to top */}
-      <section id="photo" className="photo-section">
+      
+      <section id="photo" className="photo-section" style={{ marginTop: 0, paddingTop: 0 }}>
         <div className="photo-container">
           <div className="photo-wrapper animate-float">
             <img src={bharat} alt="Bharat Varfa" className="profile-photo" />
           </div>
           <div className="photo-content">
-            <h1>Hi, I'm <span className="highlight">Bharat</span></h1>
+            <h1>Hi, I'm <span className="highlight">Bharat Varfa (Software Engineer)</span></h1>
             <h2>React Developer</h2>
             <p>I'm a passionate React developer with a keen eye for creating beautiful and functional user interfaces. With expertise in modern web technologies, I strive to build applications that make a difference.</p>
             <div className="quick-info animate-pulse">
@@ -94,8 +100,6 @@ function App() {
         </div>
       </section>
 
-      {/* Remove or comment out the hero section since we merged it with photo section */}
-      {/* Projects Section */}
       <section id="projects" className="projects-section">
         <h2 className="section-title">My Projects</h2>
         <div className="projects-grid">
@@ -117,15 +121,18 @@ function App() {
               ))}
             </div>
             <div className="project-links">
-              <a href="https://ayushbharatchatbox.netlify.app/" target="_blank" className="btn small-btn">View Demo</a>
-              <a href="#" className="btn small-btn">Source Code</a>
+              {project.demo && (
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn small-btn">View Demo</a>
+              )}
+              {project.source && (
+                <a href={project.source} target="_blank" rel="noopener noreferrer" className="btn small-btn">Source Code</a>
+              )}
             </div>
           </div>
         ))}
         </div>
       </section>
 
-      {/* Skills Section */}
       <section id="skills" className="skills-section">
         <h2 className="section-title">My Skills</h2>
         <div className="skills-container">
@@ -168,7 +175,6 @@ function App() {
         </div>
       </section>
 
-      {/* Simple Contact Section */}
       <section id="contact" className="contact-section">
         <h2 className="section-title">Contact Me</h2>
         <div className="contact-container">
@@ -178,6 +184,40 @@ function App() {
               <p><strong>Email:</strong> varfabharat19@gmail.com</p>
               <p><strong>Phone:</strong> +91 7415795995</p>
               <p><strong>Location:</strong> In Your Heart</p>
+            </div>
+            <div style={{ margin: '18px 0', color: '##e3e7efff', fontSize: '1.05rem', lineHeight: '1.6' }}>
+              <p>
+                I’m always open to discussing new projects, creative ideas, or opportunities to be part of your visions. 
+                Whether you have a question or just want to say hi, feel free to connect!
+              </p>
+              <p style={{ fontWeight: 500, marginTop: 10, color: '#e3e7efff' }}>
+                Let's build something amazing together.
+              </p>
+            </div>
+            <div className="contact-social" style={{ display: 'flex', justifyContent: 'center', gap: '32px', marginTop: '20px' }}>
+              <a href="https://www.instagram.com/_bharat_varfa_19?igsh=dXY1MWpqeHQ5NGtr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                style={{ color: '#E1306C', fontSize: '2.2rem', transition: 'transform 0.2s' }}>
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a href="https://linkedin.com/in/bharat-varfa-54b784250" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+                style={{ color: '#0077B5', fontSize: '2.2rem', transition: 'transform 0.2s' }}>
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="https://github.com/BharatVarfa" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                style={{
+                  background: '#22223b',
+                  color: '#f2e9e4',
+                  fontSize: '2.2rem',
+                  borderRadius: '50%',
+                  width: '48px',
+                  height: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'transform 0.2s'
+                }}>
+                <i className="fab fa-github"></i>
+              </a>
             </div>
           </div>
           <form className="contact-form" onSubmit={handleContactSubmit}>
@@ -207,7 +247,6 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Bharat 
           Varfa. All rights reserved.</p>
